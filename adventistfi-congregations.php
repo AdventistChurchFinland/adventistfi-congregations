@@ -3,7 +3,7 @@
 Plugin Name: Adventistfi Congregations
 Description: Custom congregations for adventist.fi
 Author: Glen Somerville
-Version: 1.0.0
+Version: 1.0.1
 Text Domain: adventistfi-congregations
 Domain Path: /languages
 */
@@ -112,10 +112,31 @@ function adventistfi_congregations_install() {
     flush_rewrite_rules();
 }
 
+function congregation_single() {
+    global $post;
+    
+    if($post->post_type == "adventistfi_congreg") {
+      $single_template = dirname(__FILE__) . '/templates/congregation-single.php';
+    }
+    return $single_template;
+}
+
+function congregation_page() {
+    global $post;
+    
+    if($post->post_type == "adventistfi_congreg") {
+      $archive_template = dirname(__FILE__) . '/templates/congregation-page.php';
+    }
+    return $archive_template;
+}
+
 add_action( 'plugins_loaded', 'adventistfi_congregations_load_plugin_textdomain' );
 add_action( 'init', 'adventistfi_congregations_custom_taxonomy' );
 add_action( 'init', 'adventistfi_congregations_register_post_type' );
 add_filter( 'post_type_link', 'adventistfi_congregation_show_permalinks' );
+
+add_filter( 'archive_template', 'congregation_page' );
+add_filter( 'single_template', 'congregation_single' );
 
 register_activation_hook( __FILE__, 'adventistfi_congregations_install' );
 

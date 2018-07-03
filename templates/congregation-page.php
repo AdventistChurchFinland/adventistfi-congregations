@@ -1,7 +1,7 @@
 <?php
   // Get all zip codes and coordinates of all gongregations
 
-  $q = get_posts(['post_type' => 'adventistfi_congreg', 'post_status' => 'publish', 'posts_per_page' => -1, 'orderby' => 'title', 'order' => 'ASC']);
+  $q = get_posts(['post_type' => 'adventistfi_congreg', 'post_status' => 'publish', 'posts_per_page' => -1]);
   
   $zipCodes = array();
   $coords = array();

@@ -133,7 +133,7 @@ function congregation_page() {
 function congregation_archive_title($title) {
     global $post;
     
-    if(is_page_template(dirname(__FILE__) . '/templates/congregation-page.php'))
+    if(is_page_template('congregation-page.php'))
     {
       return 'Adventtiseurakunnat &#8211; Suomen Adventtikirkko';
     }

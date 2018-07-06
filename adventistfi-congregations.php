@@ -130,16 +130,6 @@ function congregation_page() {
     return $archive_template;
 }
 
-function congregation_archive_title($title) {
-    global $post;
-    
-    if(is_page_template('congregation-page.php'))
-    {
-      return 'Adventtiseurakunnat &#8211; Suomen Adventtikirkko';
-    }
-    return $title;
-}
-
 function congregations_order($query) {
   if(!is_admin() && $query->is_main_query())
   {
@@ -157,12 +147,10 @@ add_action( 'init', 'adventistfi_congregations_custom_taxonomy' );
 add_action( 'init', 'adventistfi_congregations_register_post_type' );
 add_filter( 'post_type_link', 'adventistfi_congregation_show_permalinks' );
 
-add_filter( 'archive_template', 'congregation_page' );
-add_filter( 'single_template', 'congregation_single' );
-
 add_filter( 'pre_get_posts', 'congregations_order' );
 
-add_filter( 'wp_title', 'congregation_archive_title' );
+add_filter( 'archive_template', 'congregation_page' );
+add_filter( 'single_template', 'congregation_single' );
 
 register_activation_hook( __FILE__, 'adventistfi_congregations_install' );
 

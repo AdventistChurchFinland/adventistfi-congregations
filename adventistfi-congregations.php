@@ -140,6 +140,18 @@ function congregation_archive_title($title) {
     return $title;
 }
 
+function congregations_order($query) {
+  if(!is_admin() && $query->is_main_query())
+  {
+    if(get_post_type() == 'adventistfi_congreg')
+    {
+      $query->set('orderby' => 'title');
+      $query->set('order' => 'ASC');
+    }
+  }
+  return $query;
+}
+
 add_action( 'plugins_loaded', 'adventistfi_congregations_load_plugin_textdomain' );
 add_action( 'init', 'adventistfi_congregations_custom_taxonomy' );
 add_action( 'init', 'adventistfi_congregations_register_post_type' );
@@ -147,6 +159,8 @@ add_filter( 'post_type_link', 'adventistfi_congregation_show_permalinks' );
 
 add_filter( 'archive_template', 'congregation_page' );
 add_filter( 'single_template', 'congregation_single' );
+
+add_filter( 'pre_get_posts', 'congregations_order' );
 
 add_filter( 'wp_title', 'congregation_archive_title' );
 

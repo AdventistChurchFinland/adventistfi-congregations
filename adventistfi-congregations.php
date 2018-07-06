@@ -131,11 +131,9 @@ function congregation_page() {
 }
 
 function congregations_order($query) {
-  global $post;
-  
-  if(!is_admin() && $query->is_main_query())
+  if(!is_admin() && $query->is_main_query() && !is_single())
   {
-    if($post->post_type == 'adventistfi_congreg')
+    if($query->get('post_type') == 'adventistfi_congreg')
     {
       $query->set('orderby', 'title');
       $query->set('order', 'ASC');

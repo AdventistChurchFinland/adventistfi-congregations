@@ -137,8 +137,8 @@ function congregations_order($query) {
   {
     if($post->post_type == 'adventistfi_congreg')
     {
-      $query->set('orderby' => 'title');
-      $query->set('order' => 'ASC');
+      $query->set('orderby', 'title');
+      $query->set('order', 'ASC');
     }
   }
   return $query;
